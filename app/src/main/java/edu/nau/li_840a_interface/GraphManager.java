@@ -27,10 +27,14 @@ public class GraphManager implements Runnable
     private LineGraph h2oGraph;
     private LineGraph tempGraph;
     private LineGraph presGraph;
+    private LineGraph parGraph;
+    private LineGraph canopyGraph;
     private TextView co2Display;
     private TextView h2oDisplay;
     private TextView tempDisplay;
     private TextView presDisplay;
+    private TextView parDisplay;
+    private TextView canopyDisplay;
     private TextView instrumentDisplay;
     private TextView finalbutton;
     private TextView warnDisplay;
@@ -72,13 +76,17 @@ public class GraphManager implements Runnable
         dataArray = new ArrayList<DataSeries>();
 
         // Initialize all of the graphs
-        co2Graph = new LineGraph(graphIds[0], "CO2", "Time (seconds)", "CO2 (ppm)",
+        co2Graph = new LineGraph(graphIds[0], "CO₂", "Time (seconds)", "CO₂ (ppm)",
                 Color.argb(255, 0, 0, 0));
-        h2oGraph = new LineGraph(graphIds[1], "H2O", "Time (seconds)", "H2O (ppt)",
+        h2oGraph = new LineGraph(graphIds[1], "H₂O", "Time (seconds)", "H₂O (ppt)",
                 Color.argb(255, 0, 0, 255));
         tempGraph = new LineGraph(graphIds[2], "Temperature", "Time (seconds)", "Temperature (°C)",
                 Color.argb(255, 255, 0, 0));
         presGraph = new LineGraph(graphIds[3], "Pressure", "Time (seconds)", "Pressure (kPa)",
+                Color.argb(255, 0, 125, 0));
+        parGraph = new LineGraph(graphIds[4], "PAR", "Time (seconds)", "PAR (μmol/m²/s)",
+                Color.argb(255, 0, 125, 0));
+        canopyGraph = new LineGraph(graphIds[5], "Canopy Temp", "Time (seconds)", "C. Temp (°C)",
                 Color.argb(255, 0, 125, 0));
 
         // Get the IDs for the text views used to display the data values
@@ -86,6 +94,8 @@ public class GraphManager implements Runnable
         h2oDisplay = textIds[1];
         tempDisplay = textIds[2];
         presDisplay = textIds[3];
+        parDisplay = textIds[4];
+        canopyDisplay = textIds[5];
         instrumentDisplay = textIds[6];
         finalbutton = textIds[7];
         warnDisplay = textIds[8];
@@ -314,6 +324,9 @@ public class GraphManager implements Runnable
         h2oGraph.reset();
         tempGraph.reset();
         presGraph.reset();
+        parGraph.reset();
+        canopyGraph.reset();
+
     }
 
     /*
@@ -326,6 +339,8 @@ public class GraphManager implements Runnable
         h2oGraph.enableZoom();
         tempGraph.enableZoom();
         presGraph.enableZoom();
+        parGraph.enableZoom();
+        canopyGraph.enableZoom();
     }
 
     /*
@@ -338,6 +353,8 @@ public class GraphManager implements Runnable
         h2oGraph.disableZoom();
         tempGraph.disableZoom();
         presGraph.disableZoom();
+        parGraph.disableZoom();
+        canopyGraph.disableZoom();
     }
 
     /*
@@ -367,7 +384,7 @@ public class GraphManager implements Runnable
         output = "";
 
         // Add the CSV header
-        output += "Runtime,Year,Month,Day,Hour,Minute,Second,CO2,H2O,Temperature,Pressure\n";
+        output += "Runtime,Year,Month,Day,Hour,Minute,Second,CO2,H2O,Temperature,Pressure,PAR,CanopyTemperature\n";
 
         // Loop through each data series in the data array
         for (DataSeries series : dataArray)
@@ -409,7 +426,7 @@ public class GraphManager implements Runnable
         newSeries = new DataSeries(data, time);
 
         // If the data point is invalid, do not add it to the data array or graphs
-        if (newSeries.co2 == 0 || newSeries.h2o == 0 || newSeries.temp == 0 || newSeries.pres == 0)
+        if (newSeries.co2 == 0 || newSeries.h2o == 0 || newSeries.temp == 0 || newSeries.pres == 0 || newSeries.par == 0 || newSeries.canopy == 0)
         {
             return;
         }
@@ -431,19 +448,23 @@ public class GraphManager implements Runnable
                 h2oGraph.addPoint(newSeries.h2o, newSeries.time);
                 tempGraph.addPoint(newSeries.temp, newSeries.time);
                 presGraph.addPoint(newSeries.pres, newSeries.time);
+                parGraph.addPoint(newSeries.par, newSeries.time);
+                canopyGraph.addPoint(newSeries.canopy, newSeries.time);
 
                 // Update each text view with the data series
                 co2Display.setText(String.format("%.1f ppm", newSeries.co2));
                 h2oDisplay.setText(String.format("%.3f ppt", newSeries.h2o));
                 tempDisplay.setText(String.format("%.1f °C", newSeries.temp));
                 presDisplay.setText(String.format("%.1f kPa", newSeries.pres));
+                parDisplay.setText(String.format("%.1f μmol/m²/s", newSeries.par));
+                canopyDisplay.setText(String.format("%.1f °C", newSeries.canopy));
                 // WARNING when instrument is still warming up or Battery Low
                 if (newSeries.temp < 50.0 | newSeries.volt < 10.6) {
                     warnString="";
                     warnDisplay.setVisibility(View.VISIBLE);
                     if (newSeries.temp < 50.0) { warnString+=instrument + ": warming up, please wait"; }
                     if (newSeries.temp < 50.0 & newSeries.volt < 10.6) {warnString+='\n'; }
-                    if (newSeries.volt < 10.6) { warnString+= String.format("%s: low Battery warning (%.1f V)",instrument, newSeries.volt); }
+                    if (newSeries.volt < 10.6) { warnString+= String.format("%s: LOW BATTERY (%.1f V)",instrument, newSeries.volt); }
                     warnDisplay.setText(warnString);
                 }else {warnDisplay.setText("");warnDisplay.setVisibility(View.GONE);}
 
@@ -479,6 +500,8 @@ public class GraphManager implements Runnable
         public float temp;
         public float pres;
         public float volt;
+        public float par;
+        public float canopy;
 
         /*
          *  Constructor for the DataSeries. Takes in the data from the
@@ -514,6 +537,8 @@ public class GraphManager implements Runnable
             temp = parse[2];
             pres = parse[3];
             volt = parse[4];
+            par = parse[5];
+            canopy = parse[6];
 
         }
 
@@ -531,7 +556,7 @@ public class GraphManager implements Runnable
             float[] output;
 
             // Initialize our array which will hold all the parsed values
-            output = new float[5];
+            output = new float[7];
 
             // Try to parse out the CO2
             try
@@ -580,6 +605,25 @@ public class GraphManager implements Runnable
             catch(Exception exception)
             {
                 output[4] = (float) 0.0;
+            }
+            // try to parse out Photosynthetically active radiation from our intermediate measurement processor
+
+            try
+            {
+                output[5] = stringToFloat(data.split("<par>")[1].split("</par>")[0]);
+            }
+            catch(Exception exception)
+            {
+                output[5] = (float) 0.0;
+            }
+            // try to parse out Canopy Temperature from our intermediate measurement processor
+            try
+            {
+                output[6] = stringToFloat(data.split("<tveg>")[1].split("</tveg>")[0]);
+            }
+            catch(Exception exception)
+            {
+                output[6] = (float) 0.0;
             }
 
             // Return an array of all the parsed values
@@ -630,7 +674,7 @@ public class GraphManager implements Runnable
 
             // Add each value to the output string
 //            output += time + "," + year + "," + month + "," + day + "," + hour + "," + minute + "," + Math.round(second  * 2) / 2.0 + "," + co2 + "," + h2o + "," + temp + "," + pres;
-            output += time + "," + year + "," + month + "," + day + "," + hour + "," + minute + "," + second + "," + co2 + "," + h2o + "," + temp + "," + pres;
+            output += time + "," + year + "," + month + "," + day + "," + hour + "," + minute + "," + second + "," + co2 + "," + h2o + "," + temp + "," + pres + "," + par + "," + canopy ;
 
             // Return the output
             return output;

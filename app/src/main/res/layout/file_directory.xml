@@ -16,11 +16,13 @@
 
         <Button
             android:id="@+id/btn_filter"
-            android:background = "@android:drawable/btn_default"
-            android:text="Apply Filter"
             android:layout_width="0dip"
             android:layout_height="match_parent"
-            android:layout_weight="0.25"/>
+            android:layout_weight="0.25"
+            android:background="@android:drawable/btn_default"
+            android:text="Apply Filter"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black" />
 
         <EditText
             android:id="@+id/et_filter"
@@ -33,12 +35,13 @@
 
         <Button
             android:id="@+id/btn_newdataset"
-            android:text="New Dataset"
-            android:onClick="goNewDataSet"
-            android:background = "@android:drawable/btn_default"
             android:layout_width="0dip"
             android:layout_height="match_parent"
-            android:layout_weight="0.25"/>
+            android:layout_weight="0.25"
+            android:background="@android:drawable/btn_default"
+            android:onClick="goNewDataSet"
+            android:text="New Dataset"
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 
@@ -58,29 +61,32 @@
 
         <Button
             android:id="@+id/button5"
-            android:text="Home"
-            android:onClick="goHomeScreen"
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:background = "@android:drawable/btn_default"/>
+            android:background="@android:drawable/btn_default"
+            android:onClick="goHomeScreen"
+            android:text="Home"
+            android:textColor="@android:color/black" />
 
         <Button
 
             android:id="@+id/btn_delete"
-            android:text="Delete"
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:background = "@android:drawable/btn_default"/>
+            android:background="@android:drawable/btn_default"
+            android:text="Delete"
+            android:textColor="@android:color/black" />
 
         <Button
             android:id="@+id/btn_view"
-            android:text="View"
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:background = "@android:drawable/btn_default"/>
+            android:background="@android:drawable/btn_default"
+            android:text="View"
+            android:textColor="@android:color/black" />
 
         <Button
             android:id="@+id/btn_email"
@@ -88,7 +94,8 @@
             android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:background="@android:drawable/btn_default"
-            android:text="Upload" />
+            android:text="Upload"
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 

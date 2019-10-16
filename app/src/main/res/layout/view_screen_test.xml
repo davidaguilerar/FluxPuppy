@@ -124,7 +124,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="0.35"
+        android:layout_weight="0.25"
         android:orientation="vertical">
 
         <com.jjoe64.graphview.GraphView
@@ -144,6 +144,14 @@
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph4"
+            android:layout_width="match_parent"
+            android:layout_height="0dip" />
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graph5"
+            android:layout_width="match_parent"
+            android:layout_height="0dip" />
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graph6"
             android:layout_width="match_parent"
             android:layout_height="0dip" />
 
@@ -186,7 +194,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="0.1"
+        android:layout_weight="0.08"
         android:orientation="vertical">
 
         <LinearLayout
@@ -202,7 +210,8 @@
                 android:layout_weight="0.25"
                 android:background="@android:drawable/btn_default"
                 android:onClick="showCO2"
-                android:text="CO2" />
+                android:text="CO₂"
+                android:textColor="@android:color/black" />
 
             <Button
                 android:id="@+id/h2obutton"
@@ -211,7 +220,8 @@
                 android:layout_weight="0.25"
                 android:background="@android:drawable/btn_default"
                 android:onClick="showH2O"
-                android:text="H20" />
+                android:text="H₂O"
+                android:textColor="@android:color/black" />
 
             <Button
                 android:id="@+id/tempbutton"
@@ -220,7 +230,8 @@
                 android:layout_weight="0.25"
                 android:background="@android:drawable/btn_default"
                 android:onClick="showTemp"
-                android:text="Temp" />
+                android:text="Temp"
+                android:textColor="@android:color/black" />
 
             <Button
                 android:id="@+id/presbutton"
@@ -229,7 +240,26 @@
                 android:layout_weight="0.25"
                 android:background="@android:drawable/btn_default"
                 android:onClick="showPres"
-                android:text="Pressure" />
+                android:text="Pres"
+                android:textColor="@android:color/black" />
+            <Button
+                android:id="@+id/parbutton"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@android:drawable/btn_default"
+                android:onClick="showPar"
+                android:text="PAR"
+                android:textColor="@android:color/black" />
+            <Button
+                android:id="@+id/canopybutton"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@android:drawable/btn_default"
+                android:onClick="showCT"
+                android:text="CanoTmp"
+                android:textColor="@android:color/black" />
 
         </LinearLayout>
 
@@ -238,7 +268,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="0.1"
+        android:layout_weight="0.08"
         android:orientation="horizontal">
 
         <Button
@@ -248,7 +278,8 @@
             android:layout_weight="0.25"
             android:background="@android:drawable/btn_default"
             android:onClick="goToFileDirectory"
-            android:text="Exit" />
+            android:text="Exit"
+            android:textColor="@android:color/black" />
 
         <Button
             android:id="@+id/saveAndFileDirectoryButton"
@@ -258,7 +289,9 @@
             android:background="@android:drawable/btn_default"
             android:enabled="false"
             android:onClick="saveAndGoToFileDirectory"
-            android:text="Save Subgraph and Exit" />
+            android:text="Save Subgraph and Exit"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black" />
 
         <Button
             android:id="@+id/splitButton"
@@ -267,7 +300,9 @@
             android:layout_weight="0.25"
             android:background="@android:drawable/btn_default"
             android:onClick="applySubgraph"
-            android:text="Apply Subgraph" />
+            android:text="Apply Subgraph"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black" />
 
         <EditText
             android:id="@+id/splitText"

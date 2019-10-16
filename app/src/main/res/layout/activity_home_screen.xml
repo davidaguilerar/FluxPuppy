@@ -10,10 +10,19 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="0.2"
+        android:layout_weight="0.10"
         android:gravity="center"
         android:text="Flux Puppy"
         android:textSize="64sp" />
+
+    <TextView
+        android:id="@+id/subcaption1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.03"
+        android:gravity="center"
+        android:text="Welcome to Flux Puppy, an application that measures data from LI-820/830/840 Gas Analyzers and other environmental sensors."
+        android:textSize="18sp" />
 
     <ImageView
         android:layout_width="match_parent"
@@ -22,29 +31,54 @@
         android:paddingVertical="@android:dimen/app_icon_size"
         app:srcCompat="@drawable/dog" />
 
-    <Button
+    <TextView
+        android:id="@+id/selectlabel"
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="0.15"
-        android:background = "@android:drawable/btn_default"
-        android:text="Start New Data Set"
-        android:onClick="goNewDataSet"/>
+        android:layout_height="wrap_content"
+        android:layout_weight="0.01"
+        android:gravity="center"
+        android:text="Please select an option"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:background="@android:drawable/btn_default"
+            android:onClick="goNewDataSet"
+            android:text="Start a New Measurement"
+            android:textColor="@android:color/black" />
+
+        <Button
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:background="@android:drawable/btn_default"
+            android:onClick="goFileDirectory"
+            android:text="Previously Saved Measurements"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="0.15"
-        android:background = "@android:drawable/btn_default"
-        android:text="File Directory"
-        android:onClick="goFileDirectory"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="0.1"
+        android:layout_weight="0.03"
         android:background="@android:color/transparent"
         android:gravity="center"
-        android:text="@string/version_name"
-        android:onClick="about"/>
+        android:onClick="about"
+        android:text="@string/version_name" />
+
+    <TextView
+        android:id="@+id/copyrightlabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="© 2019 Mariah Carbone and others, Northern Arizona University. Portions by Ecosystems Ecology Laboratory, University of Chile" />
 
 </LinearLayout>

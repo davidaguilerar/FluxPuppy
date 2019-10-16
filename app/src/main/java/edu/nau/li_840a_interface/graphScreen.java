@@ -84,14 +84,16 @@ public class graphScreen extends AppCompatActivity {
                 });
 
         // Get the screen IDs for each of the four graphs
-        graphIds = new GraphView[4];
+        graphIds = new GraphView[6];
         graphIds[0] = findViewById(R.id.graph1);
         graphIds[1] = findViewById(R.id.graph2);
         graphIds[2] = findViewById(R.id.graph3);
         graphIds[3] = findViewById(R.id.graph4);
+        graphIds[4] = findViewById(R.id.graph5);
+        graphIds[5] = findViewById(R.id.graph6);
 
         // Get the screen IDs for each of the four text views
-        textIds = new TextView[9];
+        textIds = new TextView[11];
         textIds[0] = findViewById(R.id.co2display);
         textIds[1] = findViewById(R.id.h2odisplay);
         textIds[2] = findViewById(R.id.tempdisplay);
@@ -102,6 +104,9 @@ public class graphScreen extends AppCompatActivity {
         textIds[6] = findViewById(R.id.instrumentdisplay);
         textIds[7] = findViewById(R.id.finalbutton);
         textIds[8] = findViewById(R.id.warningdisplay);
+
+        textIds[9] = findViewById(R.id.pardisplay);
+        textIds[10] = findViewById(R.id.canodisplay);
 
         Intent intent = getIntent();
         Bundle bd = intent.getExtras();
@@ -155,7 +160,7 @@ public class graphScreen extends AppCompatActivity {
     public void setConnected(int connection){
         final Button button = findViewById(R.id.connectbutton);
         if (connection==BLUETOOTH){
-            button.setText("Disconnect Bluetooth");
+            button.setText("Disconnect BT");
             device_connection=BLUETOOTH;
             bt_established=true;
         }
@@ -240,6 +245,8 @@ public class graphScreen extends AppCompatActivity {
         graphIds[1].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         graphIds[2].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         graphIds[3].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[4].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[5].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
 
 
     }
@@ -256,6 +263,8 @@ public class graphScreen extends AppCompatActivity {
         graphIds[2].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         graphIds[3].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         graphIds[0].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[4].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[5].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
 
     }
 
@@ -271,6 +280,8 @@ public class graphScreen extends AppCompatActivity {
         graphIds[3].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         graphIds[0].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         graphIds[1].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[4].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[5].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
 
     }
 
@@ -286,6 +297,41 @@ public class graphScreen extends AppCompatActivity {
         graphIds[0].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         graphIds[1].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         graphIds[2].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[4].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[5].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+
+    }
+
+    /*
+     *  Runs when the "PAR" button is pressed. Hides every graph except for the PAR one.
+     */
+    public void showPar(View view)
+    {
+
+        graphIds[4].setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT));
+        graphIds[0].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[1].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[2].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[3].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[5].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+
+    }
+    /*
+     *  Runs when the "Canopy Temperature" button is pressed. Hides every graph except for the CT one.
+     */
+    public void showCT(View view)
+    {
+
+        graphIds[5].setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT));
+        graphIds[4].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[3].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[2].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[1].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[0].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
 
     }
 
@@ -351,7 +397,7 @@ public class graphScreen extends AppCompatActivity {
             else
             {
 
-                button.setText("Stop Logging");
+                button.setText("Stop Log");
                 finalizeButton.setBackgroundColor(Color.TRANSPARENT);
                 finalizeButton.setEnabled(false);
                 finalizeButton.setTextSize(24);
@@ -366,12 +412,12 @@ public class graphScreen extends AppCompatActivity {
         // If the button currently says "Stop Logging", switch the text and inform the manager
         else
         {
-            button.setText("Start Logging");
+            button.setText("Start Log");
             if (!manager.isEmpty())
             {
                 finalizeButton.setBackgroundResource(android.R.drawable.btn_default);
                 finalizeButton.setEnabled(true);
-                finalizeButton.setText("Save and Exit");
+                finalizeButton.setText("Save'n Exit");
                 finalizeButton.setTextSize(14);
                 finalizeButton.setTextColor(button.getCurrentTextColor());
                 loggingstopped=true;
@@ -932,12 +978,16 @@ public class graphScreen extends AppCompatActivity {
         String h2oPoints;
         String tempPoints;
         String presPoints;
+        String parPoints;
+        String canopyPoints;
         int count;
 
         co2Points = "";
         h2oPoints = "";
         tempPoints = "";
         presPoints = "";
+        parPoints = "";
+        canopyPoints = "";
 
         lines = graphFileContents.split("\n");
 
@@ -950,15 +1000,19 @@ public class graphScreen extends AppCompatActivity {
             h2oPoints += values[0] + "," + values[8] + "\n";
             tempPoints += values[0] + "," + values[9] + "\n";
             presPoints += values[0] + "," + values[10] + "\n";
+            parPoints += values[0] + "," + values[11] + "\n";
+            canopyPoints += values[0] + "," + values[12] + "\n";
 
         }
 
-        output = new String[4];
+        output = new String[6];
 
         output[0] = co2Points;
         output[1] = h2oPoints;
         output[2] = tempPoints;
         output[3] = presPoints;
+        output[4] = parPoints;
+        output[5] = canopyPoints;
 
         return output;
 
@@ -998,7 +1052,7 @@ public class graphScreen extends AppCompatActivity {
         String[] tempData;
         int numOfPoints;
 
-        if (graphPoints == ""){
+        if (graphPoints.equals("")){
             return 0;
         }
 

@@ -69,6 +69,8 @@ public class viewScreen extends AppCompatActivity {
     private LineGraph h2oGraph;
     private LineGraph tempGraph;
     private LineGraph presGraph;
+    private LineGraph parGraph;
+    private LineGraph canopyGraph;
 
     private TextView slope;
     private TextView standardError;
@@ -125,18 +127,22 @@ public class viewScreen extends AppCompatActivity {
 
 
         //graph ids array
-        graphIds = new GraphView[4];
+        graphIds = new GraphView[6];
         graphIds[0] = findViewById(R.id.graph1);
         graphIds[1] = findViewById(R.id.graph2);
         graphIds[2] = findViewById(R.id.graph3);
         graphIds[3] = findViewById(R.id.graph4);
+        graphIds[4] = findViewById(R.id.graph5);
+        graphIds[5] = findViewById(R.id.graph6);
 
         //graph text views
-        textIds = new TextView[4];
+        textIds = new TextView[6];
         textIds[0] = findViewById(R.id.co2display);
         textIds[1] = findViewById(R.id.h2odisplay);
         textIds[2] = findViewById(R.id.tempdisplay);
         textIds[3] = findViewById(R.id.presdisplay);
+        textIds[4] = findViewById(R.id.pardisplay);
+        textIds[5] = findViewById(R.id.canodisplay);
 
         // Image
         ImageView metaImageDisplay = findViewById(R.id.metaDataImage);
@@ -257,11 +263,13 @@ public class viewScreen extends AppCompatActivity {
 
         catch(Exception exception)
         {
-            graphArray = new String[4];
+            graphArray = new String[6];
             graphArray[0] = "";
             graphArray[1] = "";
             graphArray[2] = "";
             graphArray[3] = "";
+            graphArray[4] = "";
+            graphArray[5] = "";
         }
 
 
@@ -278,6 +286,11 @@ public class viewScreen extends AppCompatActivity {
                 Color.argb(255, 255, 0, 0), graphArray[2]);
         presGraph = new LineGraph(graphIds[3], "Pressure", "Time (seconds)", "Pressure (kPa)",
                 Color.argb(255, 0, 125, 0), graphArray[3]);
+        parGraph = new LineGraph(graphIds[4], "PAR", "Time (seconds)", "PAR (μmol/m²/s)",
+                Color.argb(255, 0, 125, 0), graphArray[4]);
+        canopyGraph = new LineGraph(graphIds[5], "Canopy Temp", "Time (seconds)", "C. Temp (°C)",
+                Color.argb(255, 0, 125, 0), graphArray[5]);
+
 
         //add a regression line to the co2 graph
         co2Graph.resetZoom();
@@ -294,6 +307,8 @@ public class viewScreen extends AppCompatActivity {
         graphIds[1].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         graphIds[2].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         graphIds[3].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[4].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[5].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
 
         co2Graph.resetZoom();
 
@@ -309,6 +324,8 @@ public class viewScreen extends AppCompatActivity {
         graphIds[2].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         graphIds[3].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         graphIds[0].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[4].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[5].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
 
         h2oGraph.resetZoom();
     }
@@ -322,6 +339,8 @@ public class viewScreen extends AppCompatActivity {
         graphIds[3].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         graphIds[0].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         graphIds[1].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[4].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[5].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
 
         tempGraph.resetZoom();
     }
@@ -335,8 +354,40 @@ public class viewScreen extends AppCompatActivity {
         graphIds[0].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         graphIds[1].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         graphIds[2].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[4].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[5].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
 
         presGraph.resetZoom();
+    }
+
+    public void showPar(View view)
+    {
+
+        graphIds[4].setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT));
+        graphIds[0].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[1].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[2].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[3].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[5].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+
+        parGraph.resetZoom();
+    }
+
+    public void showCT(View view)
+    {
+
+        graphIds[5].setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT));
+        graphIds[4].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[3].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[2].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[1].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        graphIds[0].setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+
+        canopyGraph.resetZoom();
     }
 
     private String[] splitGraphData(String graphFileContents)
@@ -349,12 +400,16 @@ public class viewScreen extends AppCompatActivity {
         String h2oPoints;
         String tempPoints;
         String presPoints;
+        String parPoints;
+        String canopyPoints;
         int count;
 
         co2Points = "";
         h2oPoints = "";
         tempPoints = "";
         presPoints = "";
+        parPoints = "";
+        canopyPoints = "";
 
         lines = graphFileContents.split("\n");
 
@@ -367,15 +422,19 @@ public class viewScreen extends AppCompatActivity {
             h2oPoints += values[0] + "," + values[8] + "\n";
             tempPoints += values[0] + "," + values[9] + "\n";
             presPoints += values[0] + "," + values[10] + "\n";
+            parPoints += values[0] + "," + values[11] + "\n";
+            canopyPoints += values[0] + "," + values[12] + "\n";
 
         }
 
-        output = new String[4];
+        output = new String[6];
 
         output[0] = co2Points;
         output[1] = h2oPoints;
         output[2] = tempPoints;
         output[3] = presPoints;
+        output[4] = parPoints;
+        output[5] = canopyPoints;
 
         return output;
 
@@ -882,11 +941,13 @@ public class viewScreen extends AppCompatActivity {
             }
             catch(Exception exception)
             {
-                graphArray = new String[4];
+                graphArray = new String[6];
                 graphArray[0] = "";
                 graphArray[1] = "";
                 graphArray[2] = "";
                 graphArray[3] = "";
+                graphArray[4] = "";
+                graphArray[5] = "";
                 newStdError = "";
                 newRSquared = "";
                 newRegSlope = "";
@@ -937,6 +998,10 @@ public class viewScreen extends AppCompatActivity {
                     Color.argb(255, 255, 0, 0), graphArray[2]);
             presGraph = new LineGraph(graphIds[3], "Pressure", "Time (seconds)", "Pressure (kPa)",
                     Color.argb(255, 0, 125, 0), graphArray[3]);
+            parGraph = new LineGraph(graphIds[4], "PAR", "Time (seconds)", "PAR (μmol/m²/s)",
+                    Color.argb(255, 0, 125, 0), graphArray[4]);
+            canopyGraph = new LineGraph(graphIds[5], "Canopy Temp", "Time (seconds)", "C. Temp (°C)",
+                    Color.argb(255, 0, 125, 0), graphArray[5]);
 
             //add a regression line to the co2 graph
             co2Graph.addRegLine(yIntercept, Float.parseFloat(newRegSlope));
