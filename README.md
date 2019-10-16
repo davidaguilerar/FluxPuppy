@@ -2,8 +2,8 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1413689.svg)](https://doi.org/10.5281/zenodo.1413689) 
 
-# FluxPuppy
-Android Interface to Licor LI-820 and LI-840 gas analyzers using Bluetooth and USB ports
+# FluxPuppy (enhanced)
+Android Interface to Licor LI-820 and LI-840 gas analyzers using Bluetooth and USB ports, with addition of LI-190R and SI-111 radiometers
 
 
 ## Introduction
