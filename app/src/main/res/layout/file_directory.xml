@@ -29,29 +29,29 @@
             android:id="@+id/et_filter"
             android:layout_width="0dip"
             android:layout_height="match_parent"
-            android:layout_weight="0.75"
+            android:layout_weight="0.5"
             android:hint="Enter Filter"
             android:inputType="textPersonName"
             android:text="" />
 
-        <ImageButton
+        <Button
             android:id="@+id/btn_filter"
             android:layout_width="0dip"
             android:layout_height="match_parent"
-            android:layout_weight="0.125"
+            android:layout_weight="0.25"
             android:background="@android:drawable/btn_default"
-            android:src="@drawable/checkicon"
+            android:text="Apply Filter"
             android:textAllCaps="true"
             android:textColor="@android:color/black" />
 
-        <ImageButton
+        <Button
             android:id="@+id/btn_newdataset"
             android:layout_width="0dip"
             android:layout_height="match_parent"
-            android:layout_weight="0.125"
+            android:layout_weight="0.25"
             android:background="@android:drawable/btn_default"
             android:onClick="goNewDataSet"
-            android:src="@drawable/addfileicon"
+            android:text="New Dataset"
             android:textColor="@android:color/black" />
 
     </LinearLayout>
