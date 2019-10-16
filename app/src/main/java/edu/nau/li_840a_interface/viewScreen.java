@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
@@ -90,22 +91,9 @@ public class viewScreen extends AppCompatActivity {
         //set up UI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_screen_test);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
-                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-
-        getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(
-                new View.OnSystemUiVisibilityChangeListener() {
-                    @Override
-                    public void onSystemUiVisibilityChange(int visibility) {
-                        getWindow().getDecorView().setSystemUiVisibility(
-                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-                                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
-                                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-                    }
-                });
         TextView instrument = findViewById(R.id.tv_Instrument);
         TextView site = findViewById(R.id.tv_SiteName);
         TextView operator = findViewById(R.id.tv_OpName);

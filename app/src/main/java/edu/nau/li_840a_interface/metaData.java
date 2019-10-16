@@ -23,6 +23,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -120,22 +121,23 @@ public class metaData extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.meta_data);
 
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
-                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-
-        getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(
-                new View.OnSystemUiVisibilityChangeListener() {
-                    @Override
-                    public void onSystemUiVisibilityChange(int visibility) {
-                        getWindow().getDecorView().setSystemUiVisibility(
-                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-                                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
-                                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-                    }
-                });
-
+//        getWindow().getDecorView().setSystemUiVisibility(
+//                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+//                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+//                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+//
+//        getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(
+//                new View.OnSystemUiVisibilityChangeListener() {
+//                    @Override
+//                    public void onSystemUiVisibilityChange(int visibility) {
+//                        getWindow().getDecorView().setSystemUiVisibility(
+//                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+//                                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+//                                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+//                    }
+//                });
+        android.support.v7.widget.Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
         // Assigning Variables by ID
         Date currentDate = new Date();
         OperatorName = findViewById(R.id.et_ON);

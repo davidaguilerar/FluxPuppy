@@ -4,9 +4,12 @@ import java.util.Set;
         import android.app.Activity;
         import android.bluetooth.BluetoothAdapter;
         import android.bluetooth.BluetoothDevice;
-        import android.content.Intent;
+import android.content.ComponentName;
+import android.content.Intent;
         import android.os.Bundle;
-        import android.view.View;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
         import android.widget.AdapterView;
         import android.widget.AdapterView.OnItemClickListener;
         import android.widget.ArrayAdapter;
@@ -14,7 +17,7 @@ import java.util.Set;
         import android.widget.TextView;
         import android.widget.Toast;
 
- public class BTSelectDevice  extends Activity {
+ public class BTSelectDevice  extends AppCompatActivity {
 
      boolean connecting=false;
 
@@ -26,6 +29,8 @@ import java.util.Set;
      protected void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
          setContentView(R.layout.bt_device_list);
+         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+         setSupportActionBar(myToolbar);
      }
 
      @Override
@@ -69,7 +74,6 @@ import java.util.Set;
          }
      }
 
-
      public void deviceselection(){
 
          // Initialize array adapter for paired devices
@@ -88,7 +92,7 @@ import java.util.Set;
 
          // Add previosuly paired devices to the array
          if (pairedDevices.size() > 0) {
-             findViewById(R.id.title_paired_devices).setVisibility(View.VISIBLE);//make title viewable
+             //findViewById(R.id.title_paired_devices).setVisibility(View.VISIBLE);//make title viewable
              for (BluetoothDevice device : pairedDevices) {
                  mPairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
              }

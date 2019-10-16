@@ -16,11 +16,13 @@ import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,23 +67,8 @@ public class graphScreen extends AppCompatActivity {
         // Initializes the display
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graph_screen);
-
-        // Sets the screen in fullscreen mode
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
-                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-
-        getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(
-                new View.OnSystemUiVisibilityChangeListener() {
-                    @Override
-                    public void onSystemUiVisibilityChange(int visibility) {
-                        getWindow().getDecorView().setSystemUiVisibility(
-                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-                                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
-                                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-                    }
-                });
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         // Get the screen IDs for each of the four graphs
         graphIds = new GraphView[6];
@@ -112,9 +99,9 @@ public class graphScreen extends AppCompatActivity {
         Bundle bd = intent.getExtras();
         if(bd != null)
         {
-            String getName = (String) bd.get("SITE_NAME");
+            String getName = (String) "Site: " + bd.get("SITE_NAME");
             textIds[4].setText(getName);
-            getName = (String) bd.get("SAMPLE_ID");
+            getName = (String) "Sample: " + bd.get("SAMPLE_ID");
             textIds[5].setText(getName);
         }
         countdown_label= String.format("Log duration\n%d:%02d", logduration/ (60 * 1000) % 60, logduration / 1000 % 60);
@@ -151,21 +138,21 @@ public class graphScreen extends AppCompatActivity {
     }
 
     public void setNotConnected(){
-        final Button button = findViewById(R.id.connectbutton);
-        button.setText("Connect");
+        final ImageButton button = findViewById(R.id.connectbutton);
+        button.setImageResource(R.drawable.syncicon);
         device_connection=NOT_CONNECTED;
         bt_established=false;
     }
 
     public void setConnected(int connection){
-        final Button button = findViewById(R.id.connectbutton);
+        final ImageButton button = findViewById(R.id.connectbutton);
         if (connection==BLUETOOTH){
-            button.setText("Disconnect BT");
+            button.setImageResource(R.drawable.nosyncicon);
             device_connection=BLUETOOTH;
             bt_established=true;
         }
         if (connection==USB){
-            button.setText("Disconnect USB");
+            button.setImageResource(R.drawable.nosyncicon);
             device_connection=USB;
         }
     }

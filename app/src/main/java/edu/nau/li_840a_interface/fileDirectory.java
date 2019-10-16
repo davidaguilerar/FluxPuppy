@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.Image;
+import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.ViewGroup;
 
@@ -71,24 +72,8 @@ public class fileDirectory extends AppCompatActivity implements OnClickListener 
         final Context context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.file_directory);
-
-        // JIMMY ADDED CODE HERE
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
-                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-
-        getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(
-                new View.OnSystemUiVisibilityChangeListener() {
-                    @Override
-                    public void onSystemUiVisibilityChange(int visibility) {
-                        getWindow().getDecorView().setSystemUiVisibility(
-                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-                                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
-                                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-                    }
-                });
-        //JIMMY IS DONE ADDING CODE HERE
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         lv = (ListView) findViewById(R.id.listView);
 

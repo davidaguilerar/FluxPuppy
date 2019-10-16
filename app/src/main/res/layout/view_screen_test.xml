@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.nau.li_840a_interface.viewScreen"
     android:orientation="vertical"
-    android:layout_marginLeft="16dip"
-    android:layout_marginRight="16dip">
+    tools:context="edu.nau.li_840a_interface.viewScreen">
 
     <!-- File name -->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:navigationIcon="@drawable/charticon"
+        app:title="File Viewer" />
+
     <TextView
         android:id="@+id/tv_FileName"
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="0.05"
+        android:layout_weight="0.03"
         android:text="TextView"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="16sp" />
 
     <!-- Metadata -->
     <LinearLayout
@@ -99,8 +109,8 @@
                 android:layout_height="wrap_content"
                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-.#_=+/@'():;!?$ "
                 android:hint="Edit comments"
-                android:maxLength = "250"
-                android:inputType="textCapWords"/>
+                android:inputType="textCapWords"
+                android:maxLength="250" />
 
         </LinearLayout>
 
@@ -113,8 +123,7 @@
             <ImageView
                 android:id="@+id/metaDataImage"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 
@@ -146,10 +155,12 @@
             android:id="@+id/graph4"
             android:layout_width="match_parent"
             android:layout_height="0dip" />
+
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph5"
             android:layout_width="match_parent"
             android:layout_height="0dip" />
+
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph6"
             android:layout_width="match_parent"
@@ -242,6 +253,7 @@
                 android:onClick="showPres"
                 android:text="Pres"
                 android:textColor="@android:color/black" />
+
             <Button
                 android:id="@+id/parbutton"
                 android:layout_width="0dip"
@@ -251,6 +263,7 @@
                 android:onClick="showPar"
                 android:text="PAR"
                 android:textColor="@android:color/black" />
+
             <Button
                 android:id="@+id/canopybutton"
                 android:layout_width="0dip"

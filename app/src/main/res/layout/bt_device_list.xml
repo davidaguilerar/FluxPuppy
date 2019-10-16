@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
 
-    <TextView
-        android:id="@+id/title_paired_devices"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#666"
-        android:gravity="center"
-        android:paddingLeft="5dp"
-        android:text="Select Bluetooth device to connect to your instrument"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#FF99CC00" />
+        android:background="#81D4FA"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:navigationIcon="@drawable/bticon"
+        app:title="Connect IRGA via Bluetooth" />
+
     <ListView android:id="@+id/paired_devices"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,14 +28,12 @@
         android:id="@+id/infoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="If your device isn't listed, please pair your device in Android settings first"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
-
-    </LinearLayout>
+        android:background="#FFF8E1"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:text="If your device isn't listed, please pair your device in Android settings first."
+        android:textAppearance="@style/TextAppearance.AppCompat.Notification.Info"
+        android:textSize="18sp"
+        android:textStyle="italic" />
 
 </LinearLayout>

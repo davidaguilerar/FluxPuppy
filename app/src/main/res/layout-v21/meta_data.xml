@@ -5,17 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="67dp"
-        android:layout_height="19dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/meta_data"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/textView9"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:navigationIcon="@drawable/informationicon"
+        app:title="Setup Measurement Metadata"
+        tools:layout_editor_absoluteX="0dp" />
 
     <Button
         android:id="@+id/b_finish"
@@ -36,13 +39,12 @@
 
     <EditText
         android:id="@+id/et_Com"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="16dp"
+        android:layout_width="223dp"
+        android:layout_height="59dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@android:color/transparent"
         android:backgroundTint="@color/colorPrimary"
         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-.#_=+/@'():;!?$ "
@@ -58,7 +60,8 @@
         app:layout_constraintEnd_toStartOf="@+id/cameraB"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_Temp" />
+        app:layout_constraintTop_toBottomOf="@+id/et_Temp"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tv_Date"
@@ -76,9 +79,8 @@
 
     <ImageButton
         android:id="@+id/cameraB"
-        android:layout_width="180dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="168dp"
+        android:layout_height="46dp"
         android:layout_marginBottom="8dp"
         android:background="@android:drawable/btn_default"
         android:contentDescription="@string/todo"
@@ -144,18 +146,18 @@
         android:id="@+id/et_ON"
         android:layout_width="0dp"
         android:layout_height="43dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="8dp"
         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890- "
         android:ems="10"
         android:hint="@string/required"
-        android:maxLength = "40"
         android:inputType="textCapWords"
+        android:maxLength="40"
         android:textColorHint="@android:color/holo_red_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
     <EditText
         android:id="@+id/et_SN"
@@ -225,16 +227,15 @@
         android:id="@+id/et_GPSLat"
         android:layout_width="wrap_content"
         android:layout_height="42dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginRight="16dp"
-        android:layout_marginStart="8dp"
-        android:maxLength = "20"
+        android:layout_marginBottom="16dp"
         android:background="@android:color/transparent"
+        android:digits="1234567890-.:() "
         android:ems="10"
         android:gravity="center"
-        android:inputType="text|numberDecimal"
         android:hint="@string/tap_to_enter_latitude"
-        android:digits="1234567890-.:() "
+        android:inputType="text|numberDecimal"
+        android:maxLength="20"
         app:layout_constraintBottom_toTopOf="@+id/GPSbutton"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toEndOf="@+id/et_Elevation" />
@@ -243,55 +244,56 @@
         android:id="@+id/et_GPSLong"
         android:layout_width="wrap_content"
         android:layout_height="42dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="16dp"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="20dp"
         android:background="@android:color/transparent"
+        android:digits="1234567890-.:() "
         android:ems="10"
         android:gravity="center"
-        android:inputType="text|numberDecimal"
-        android:maxLength = "20"
         android:hint="@string/tap_to_enter_longitude"
-        android:digits="1234567890-.:() "
+        android:inputType="text|numberDecimal"
+        android:maxLength="20"
         app:layout_constraintBottom_toTopOf="@+id/et_GPSLat"
         app:layout_constraintEnd_toEndOf="@+id/et_GPSLat"
+        app:layout_constraintHorizontal_bias="0.312"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@+id/et_GPSLat" />
 
     <EditText
         android:id="@+id/et_Elevation"
-        android:layout_width="wrap_content"
-        android:layout_height="42dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="169dp"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
         android:background="@android:color/transparent"
-        android:ems="10"
-        android:maxLength = "20"
-        android:gravity="center"
-        android:inputType="text|numberDecimal"
-        android:hint="@string/tap_to_enter_elevation"
         android:digits="1234567890-.:() "
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/tap_to_enter_elevation"
+        android:inputType="text|numberDecimal"
+        android:maxLength="20"
         app:layout_constraintBaseline_toBaselineOf="@+id/et_GPSLat"
         app:layout_constraintEnd_toStartOf="@+id/et_GPSLat"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="251dp"
+        android:layout_height="219dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/image_preview"
         app:layout_constraintBottom_toTopOf="@+id/et_GPSLong"
         app:layout_constraintEnd_toEndOf="@+id/cameraB"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@+id/cameraB"
         app:layout_constraintTop_toBottomOf="@+id/cameraB"
         app:layout_constraintVertical_bias="0.43"
-        app:srcCompat="@drawable/noimage"
-        android:contentDescription="@string/image_preview" />
+        app:srcCompat="@drawable/noimage" />
 
     <Button
         android:id="@+id/b_cancel"
