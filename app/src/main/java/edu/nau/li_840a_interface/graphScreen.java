@@ -336,7 +336,7 @@ public class graphScreen extends AppCompatActivity {
         final Button finalizeButton = findViewById(R.id.finalbutton);
 
         // If the button current says "Start Logging", switch the text and inform the manager
-        if (button.getText().equals("Start Logging"))
+        if (button.getText().equals("Start Log"))
         {
 
             if (!manager.isEmpty())
@@ -358,7 +358,7 @@ public class graphScreen extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        button.setText("Stop Logging");
+                        button.setText("Stop Log");
                         finalizeButton.setBackgroundColor(Color.TRANSPARENT);
                         finalizeButton.setEnabled(false);
                         finalizeButton.setTextSize(24);
@@ -661,7 +661,7 @@ public class graphScreen extends AppCompatActivity {
         }
         catch(Exception exception)
         {
-
+            Toast.makeText(getBaseContext(), "Failed to write file", Toast.LENGTH_SHORT).show();
         }
 
         // Initialize a new file screen and take the user there

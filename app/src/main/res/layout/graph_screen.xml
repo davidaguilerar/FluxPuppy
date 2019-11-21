@@ -24,10 +24,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.05"
+        android:background="#FFF9C4"
         android:gravity="center"
         android:textAllCaps="true"
         android:textColor="@android:color/holo_red_dark"
-        android:textSize="24sp"
+        android:textSize="12sp"
         android:visibility="gone" />
 
     <LinearLayout
@@ -86,22 +87,29 @@
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph2"
             android:layout_width="match_parent"
-            android:layout_height="0dip" />
+            android:layout_height="0dip"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph3"
             android:layout_width="match_parent"
-            android:layout_height="0dip" />
+            android:layout_height="0dip"
+            android:layout_marginEnd="16dp" />
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph4"
             android:layout_width="match_parent"
-            android:layout_height="0dip" />
+            android:layout_height="0dip"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph5"
@@ -141,7 +149,7 @@
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
-                android:gravity="bottom"
+                android:gravity="center"
                 android:textAlignment="center"
                 android:textStyle="bold" />
 
@@ -160,7 +168,7 @@
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
-                android:gravity="bottom"
+                android:gravity="center"
                 android:textAlignment="center"
                 android:textStyle="bold" />
 
@@ -178,7 +186,7 @@
                 android:layout_weight="0.25"
                 android:background="@android:drawable/btn_default"
                 android:onClick="showTemp"
-                android:text="Air T"
+                android:text="CellT"
                 android:textColor="@android:color/black" />
 
             <TextView
@@ -186,7 +194,7 @@
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
-                android:gravity="bottom"
+                android:gravity="center"
                 android:textAlignment="center"
                 android:textStyle="bold" />
 
@@ -197,7 +205,7 @@
                 android:layout_weight="0.25"
                 android:background="@android:drawable/btn_default"
                 android:onClick="showPres"
-                android:text="Pressure"
+                android:text="Press"
                 android:textAllCaps="true"
                 android:textColor="@android:color/black" />
 
@@ -206,7 +214,7 @@
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
-                android:gravity="bottom"
+                android:gravity="center"
                 android:textAlignment="center"
                 android:textStyle="bold" />
 
@@ -224,7 +232,7 @@
                 android:layout_weight="0.25"
                 android:background="@android:drawable/btn_default"
                 android:onClick="showPar"
-                android:text="PAR Rad"
+                android:text="PAR"
                 android:textColor="@android:color/black" />
 
             <TextView
@@ -232,7 +240,7 @@
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
-                android:gravity="bottom"
+                android:gravity="center"
                 android:textAlignment="center"
                 android:textStyle="bold" />
 
@@ -243,7 +251,7 @@
                 android:layout_weight="0.25"
                 android:background="@android:drawable/btn_default"
                 android:onClick="showCT"
-                android:text="Cano T"
+                android:text="Tveg"
                 android:textColor="@android:color/black" />
 
             <TextView
@@ -251,7 +259,7 @@
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
-                android:gravity="bottom"
+                android:gravity="center"
                 android:textAlignment="center"
                 android:textStyle="bold" />
         </LinearLayout>
